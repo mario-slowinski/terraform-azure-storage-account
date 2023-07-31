@@ -18,7 +18,7 @@ resource "azurerm_storage_account" "this" {
         for_each = {
           for active_directory in [azure_files_authentication.value.active_directory] :
           active_directory.domain_name => active_directory
-          if active_directory.domain_name != null
+          if active_directory != null
         }
         content {
           storage_sid         = active_directory.value.storage_sid
