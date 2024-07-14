@@ -1,4 +1,4 @@
-resource "azurerm_storage_share_directory" "share__name" {
+resource "azurerm_storage_share_directory" "share__directory" {
   for_each = {
     for share_directory in var.share_directories :
     "${share_directory.share_name}__${share_directory.name}" => share_directory
