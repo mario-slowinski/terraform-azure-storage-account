@@ -5,7 +5,11 @@ resource "azurerm_storage_share_directory" "share__directory" {
     if share_directory.name != null
   }
 
-  name             = each.value.name
-  storage_share_id = azurerm_storage_share.name[each.value.share].id
-  metadata         = each.value.metadata
+  name = each.value.name
+  storage_share_id = startswith(each.value.share, "https://") ? (
+    each.value.share
+    ) : (
+    azurerm_storage_share.name[each.value.share].id
+  )
+  metadata = each.value.metadata
 }
